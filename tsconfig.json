@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "react",
+    "jsxFactory": "createElement",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",

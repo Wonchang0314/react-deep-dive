@@ -1,7 +1,8 @@
 import "./style.css";
 import Test from "./Test";
 import { createElement } from "./createElement";
+import { render } from "./render";
 
 document
   .querySelector("#app")!
-  .appendChild(createElement(Test().type, Test().props));
+  .appendChild(render(createElement(Test().type, Test().props)));

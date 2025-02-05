@@ -1,10 +1,10 @@
 import "./style.css";
-import { createElement } from "./createElement";
-import Test from "./Test";
-import { render } from "./render";
+import { createElement } from "./utils/createElement";
+import Test2 from "./components/Test2";
+import { render } from "./utils/render";
 
 document
   .querySelector("#app")!
   .appendChild(
-    render(createElement(Test().type, Test().props, Test().children))
+    render(createElement(Test2().type, Test2().props, Test2().children))
   );

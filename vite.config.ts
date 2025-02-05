@@ -9,7 +9,7 @@ export default defineConfig({
           [
             "@babel/plugin-transform-react-jsx",
             {
-              runtime: "automatic",
+              runtime: "preserve",
               jsxFactory: "createElement",
             },
           ],

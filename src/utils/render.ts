@@ -1,7 +1,10 @@
 import { VDom, VTextDom } from "./createElement";
 
 export function render({ type, props, children }: VDom | VTextDom) {
-  const element = document.createElement(type as keyof HTMLElementTagNameMap);
+  if (type === "text") {
+    return document.createTextNode(children);
+  }
+  const element = document.createElement(type);
 
   if (props) {
     const prop = Object.entries(props);
@@ -19,11 +22,10 @@ export function render({ type, props, children }: VDom | VTextDom) {
       children.forEach((child) => {
         element.appendChild(render(child));
       });
-    } else if (type === null) {
+    } else {
       element.appendChild(document.createTextNode(children as string));
     }
   }
 
-  console.log(element);
   return element;
 }

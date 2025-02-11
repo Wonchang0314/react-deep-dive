@@ -1,14 +1,22 @@
 import "./style.css";
-import { createElement, VDom, VTextDom } from "./utils/createElement";
+import { createElement } from "./utils/createElement";
 import Test2 from "./components/Test2";
 import { render } from "./utils/render";
-import { saveCurrentVDom } from "./utils/reRender";
+import { setRerenderFunction } from "./utils/useState";
 
-let currentVDom: VDom | VTextDom = createElement(
-  Test2().type,
-  Test2().props,
-  Test2().children
-);
-saveCurrentVDom(currentVDom);
+const root = document.querySelector("#app")!;
+const appElement = createElement(Test2().type, Test2().props, Test2().children);
 
-document.querySelector("#app")!.appendChild(render(currentVDom));
+function reRender() {
+  const root = document.querySelector("#app")!;
+  root.innerHTML = "";
+  const appElement = createElement(
+    Test2().type,
+    Test2().props,
+    Test2().children
+  );
+  render(appElement, root);
+}
+setRerenderFunction(reRender);
+
+render(appElement, root);

@@ -8,9 +8,7 @@ const Test2 = () => {
     <div id="1">
       <h1>Hello World</h1>
       <h2>현재 카운트: {count}</h2>
-      <button onClick={() => setCount((prev: number) => prev + 1)}>
-        카운트 업
-      </button>
+      <button onClick={() => setCount(count + 1)}>카운트 업</button>
     </div>
   );
 };

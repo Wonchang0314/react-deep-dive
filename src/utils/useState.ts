@@ -1,22 +1,31 @@
-import { reRender } from "./reRender";
-
-// 리액트 딥다이브 책을 보니 상태값들을 전역으로 배열의 형태로 관리하는것 같아 이런식으로 해보았습니다.
 let states: any[] = [];
-let index = 0;
+let stateIndex = 0;
+let rerenderFunction: Function;
 
-export const useState = (initValue: any) => {
-  const currentState = states[index] || initValue;
-  states[index] = currentState;
+export function setRerenderFunction(fn: Function) {
+  rerenderFunction = fn;
+}
 
-  const setState = function () {
-    let currentIdx = index;
-    return function (newValue: any) {
-      states[currentIdx] = newValue;
-      reRender();
-    };
-  };
+export function useState(initialValue: any, rerender?: Function) {
+  const currentIndex = stateIndex;
+  states[currentIndex] = states[currentIndex] ?? initialValue;
+  stateIndex++;
 
-  index += 1;
+  rerenderFunction = rerenderFunction
+    ? rerenderFunction
+    : rerender
+    ? rerender
+    : function () {};
 
-  return [currentState, setState];
-};
+  function setState(newValue: any) {
+    if (typeof newValue === "function") {
+      states[currentIndex] = newValue(states[currentIndex]);
+    } else {
+      states[currentIndex] = newValue;
+    }
+    stateIndex = 0;
+    rerenderFunction();
+  }
+
+  return [states[currentIndex], setState];
+}

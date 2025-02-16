@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 import { createElement } from "../utils/createElement";
 import { useState } from "../utils/useState";
+import { useEffect } from "../utils/useEffect";
 
 const Test2 = () => {
   const [count, setCount] = useState(0);
@@ -9,6 +10,10 @@ const Test2 = () => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
+
+  useEffect(() => {
+    console.log("사이드 이팩트!");
+  }, []);
 
   return (
     <div id="1">

@@ -1,7 +1,5 @@
 import { VDom, VTextDom } from "./createElement";
 
-// diff함수를 통해서 이전객체와 달라진점이 있는지 비교하고, 있다면 달라진 객체를 반환하도록 해야하는것 같은데...
-// 이후부터는 잘 모르겠습니다
 export const diff = (
   oldVDom: VDom | VTextDom,
   newVDom: VDom | VTextDom

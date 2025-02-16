@@ -18,6 +18,7 @@ export function useState(initialValue: any, rerender?: Function) {
     : function () {};
 
   function setState(newValue: any) {
+    if (newValue === states[currentIndex]) return;
     if (typeof newValue === "function") {
       states[currentIndex] = newValue(states[currentIndex]);
     } else {
